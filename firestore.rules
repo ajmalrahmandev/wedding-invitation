@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public invitation forms can create submissions. Public reads and edits are denied.
+    // Add App Check, rate limiting (e.g. via Cloud Functions), and stricter validation
+    // before using this for a high-traffic public event.
+    match /{collection}/{document} {
+      allow create: if collection in ['rsvps', 'duas', 'feedback']
+        && request.resource.data.keys().hasAll(['createdAt'])
+        && request.resource.data.keys().hasOnly([
+          'name', 'phone', 'guests', 'attending', 'message', 'type',
+          'couple', 'createdAt'
+        ]);
+      allow read, update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,373 @@
+<!-- ============ GATE / COVER SCREEN (Leaf Doors & Opening Animation) ============ -->
+<div class="gate-overlay" *ngIf="!invitationOpened || isOpening" [class.opened]="isOpening">
+  <div class="sky-blobs"></div>
+  <div class="door door-l"></div>
+  <div class="door door-r"></div>
+
+  <div class="gate-content">
+    <div class="crescent-symbol">🌙</div>
+    <p class="gate-arabic-verse">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="gate-verse-text">
+      “{{ wedding.copy.verse }}”
+      <span class="gate-verse-ref">— {{ wedding.copy.verseReference }}</span>
+    </p>
+
+    <!-- Couple Names on the Gate in the requested elegant cursive script -->
+    <div class="gate-couple-names">
+      <span class="gate-name">{{ wedding.couple.groom }}</span>
+      <span class="gate-amp">&</span>
+      <span class="gate-name">{{ wedding.couple.bride }}</span>
+    </div>
+
+    <div class="gate-open-action">
+      <button type="button" class="gate-open-btn" (click)="openInvitation()">
+        <span>{{ ml ? 'ക്ഷണക്കത്ത് തുറക്കുക' : 'Open Invitation' }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOP UTILITY BAR ============ -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <button class="util-btn" (click)="toggleLanguage(language === 'ml' ? 'en' : 'ml')">
+      🌐 <span>{{ language === 'ml' ? 'English' : 'മലയാളം' }}</span>
+    </button>
+    <div class="top-bar-right">
+      <button class="util-btn" *ngIf="invitationOpened" (click)="showCoverAgain()">
+        ↺ <span>{{ ml ? 'കവർ' : 'Cover' }}</span>
+      </button>
+      <button class="util-btn" (click)="toggleMusic()">
+        🎵 <span>{{ musicPlaying ? (ml ? 'നിർത്തുക' : 'Pause') : (ml ? 'പാട്ട്' : 'Music') }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main [class.revealed-content]="invitationOpened">
+  <!-- ============ HERO ARCH INVITATION CARD (Matches Screenshots 1 & 2) ============ -->
+  <section class="hero-arch-section" id="home">
+    <div class="sky-blobs"></div>
+    <!-- Floating festive confetti flakes matching Screenshot 1 -->
+    <div class="confetti-backdrop" aria-hidden="true">
+      <span class="c-flake f1"></span>
+      <span class="c-flake f2"></span>
+      <span class="c-flake f3"></span>
+      <span class="c-flake f4"></span>
+      <span class="c-flake f5"></span>
+      <span class="c-flake f6"></span>
+      <span class="c-flake f7"></span>
+      <span class="c-flake f8"></span>
+      <span class="c-flake f9"></span>
+      <span class="c-flake f10"></span>
+      <span class="c-flake f11"></span>
+      <span class="c-flake f12"></span>
+    </div>
+    <div class="hero-inner">
+      <div class="arch-frame">
+        <p class="arch-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        
+        <p class="arch-eyebrow">
+          <span *ngIf="!ml">WITH THE BLESSING OF ALMIGHTY ALLAH,<br>WE CORDIALLY INVITE YOU THE</span>
+          <span *ngIf="ml">സർവ്വശക്തനായ അള്ളാഹുവിന്റെ അനുഗ്രഹത്തോടെ,<br>ഞങ്ങൾ താങ്കളെ സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു</span>
+        </p>
+
+        <p class="arch-kicker">{{ ml ? 'നിക്കാഹ്' : 'NIKAH' }}</p>
+        <p class="arch-ceremony">{{ ml ? 'സ്വീകരണം' : 'Reception' }}</p>
+        <p class="arch-of">{{ ml ? 'ഓഫ്' : 'OF' }}</p>
+
+        <!-- Groom Name in Script Calligraphy (Screenshot 1 & 2) -->
+        <div class="couple-script-name">{{ wedding.couple.groom }}</div>
+        <p class="arch-rel" *ngIf="wedding.families.groomFather || wedding.families.groomMother">
+          {{ ml ? 'S/O' : 'S/O' }} {{ wedding.families.groomFather }}<span *ngIf="wedding.families.groomFather && wedding.families.groomMother"> & </span>{{ wedding.families.groomMother }}
+        </p>
+        <p class="arch-house" *ngIf="wedding.families.groomHouse">{{ wedding.families.groomHouse }}</p>
+
+        <!-- Elegant Union Ampersand Divider -->
+        <div class="arch-couple-connector" aria-hidden="true">
+          <span class="connector-line"></span>
+          <span class="connector-amp">&amp;</span>
+          <span class="connector-line"></span>
+        </div>
+
+        <!-- Bride Name in Script Calligraphy (Screenshot 1 & 2) -->
+        <div class="couple-script-name bride-margin">{{ wedding.couple.bride }}</div>
+        <p class="arch-rel" *ngIf="wedding.families.brideFather || wedding.families.brideMother">
+          {{ ml ? 'D/O' : 'D/O' }} {{ wedding.families.brideFather }}<span *ngIf="wedding.families.brideFather && wedding.families.brideMother"> & </span>{{ wedding.families.brideMother }}
+        </p>
+        <p class="arch-house" *ngIf="wedding.families.brideHouse">{{ wedding.families.brideHouse }}</p>
+
+        <hr class="arch-divider">
+
+        <!-- 3-Column Info Row matching Screenshot 1 (Nikah & Reception Details) -->
+        <div class="arch-info-row">
+          <div class="arch-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <div>
+              <strong>{{ wedding.event.dateLabel.split(',')[1] || wedding.event.dateLabel }}</strong>
+              <span class="info-label">{{ ml ? 'ബുധനാഴ്ച' : 'Wednesday' }}</span>
+            </div>
+          </div>
+          <div class="arch-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <div>
+              <strong>{{ wedding.event.nikahTime }} | {{ wedding.event.receptionTime }}</strong><br>
+              <span class="info-label">{{ ml ? 'നിക്കാഹ് & സ്വീകരണം' : 'Nikah & Reception' }}</span>
+            </div>
+          </div>
+          <div class="arch-info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <div>
+              <strong>{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}</strong><br>
+              <span class="info-label">{{ ml && wedding.event.areaMalayalam ? wedding.event.areaMalayalam : wedding.event.area }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Venue Block with Pin Icon -->
+        <div class="arch-venue-block">
+          <a [href]="wedding.event.mapUrl" target="_blank" rel="noopener" class="venue-map-pin" [title]="ml ? 'മാപ്പ് കാണുക' : 'Get Directions'">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </a>
+          <h4 class="arch-venue-title">{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}</h4>
+          <p class="arch-venue-area">{{ ml && wedding.event.areaMalayalam ? wedding.event.areaMalayalam : wedding.event.area }}</p>
+        </div>
+
+        <div class="arch-action-row">
+          <a class="pill-btn" [href]="wedding.event.mapUrl" target="_blank" rel="noopener">
+            ⌖ {{ ml ? 'വഴി കാണിക്കുക' : 'Get Directions' }}
+          </a>
+          <button class="pill-btn outline" (click)="addToCalendar()">
+            ▦ {{ ml ? 'കലണ്ടറിൽ ചേർക്കുക' : 'Add to Calendar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCRATCH TO REVEAL SECTION (Screenshots 2 & 3) ============ -->
+  <svg width="0" height="0" style="position: absolute; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <clipPath id="scratchHeartClip" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5, 0.95 C 0.5, 0.95, 0.03, 0.64, 0.03, 0.31 C 0.03, 0.14, 0.15, 0.04, 0.28, 0.04 C 0.38, 0.04, 0.46, 0.11, 0.5, 0.21 C 0.54, 0.11, 0.62, 0.04, 0.72, 0.04 C 0.85, 0.04, 0.97, 0.14, 0.97, 0.31 C 0.97, 0.64, 0.5, 0.95, 0.5, 0.95 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <section class="scratch-section section" id="scratch">
+    <div class="section-inner narrow">
+      <p class="scratch-eyebrow">{{ ml ? '✦ ഞങ്ങളുടെ പുതിയ തുടക്കം ✦' : '✦ Our Forever Begins ✦' }}</p>
+      <h2 class="scratch-title">{{ ml ? 'വെളിപ്പെടുത്താൻ സ്ക്രാച്ച് ചെയ്യുക' : 'Scratch to Reveal' }}</h2>
+      <div class="gold-divider"><span class="ornament">❧</span></div>
+
+      <!-- Canvas Scratch Card Over Heart Reveal -->
+      <div class="scratch-card-container">
+        <!-- The revealed content underneath (heart shape + reception details) -->
+        <div class="scratch-reveal" [class.revealed]="scratchRevealed" aria-hidden="true">
+          <div class="reveal-date-inner">
+            <p class="reveal-you-invited">{{ ml ? '✦ നിങ്ങൾ ക്ഷണിക്കപ്പെട്ടിരിക്കുന്നു ✦' : '✦ You\'re Invited ✦' }}</p>
+            <p class="reveal-date-num">02 &middot; 12 &middot; 2026</p>
+            <p class="reveal-day">{{ ml ? 'ബുധനാഴ്ച' : 'Wednesday' }}</p>
+            <p class="reveal-time">{{ ml ? 'നിക്കാഹ് 11:00 AM • സ്വീകരണം 11:30 AM' : 'Nikah 11:00 AM • Reception 11:30 AM' }}</p>
+            <p class="reveal-location">{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}</p>
+          </div>
+        </div>
+
+        <!-- Canvas drawn on top — user scratches this away -->
+        <canvas #scratchCanvas id="scratchCanvas" class="scratch-canvas"
+          [attr.aria-label]="ml ? 'തീയതി വെളിപ്പെടുത്താൻ ഇവിടെ സ്ക്രാച്ച് ചെയ്യുക' : 'Scratch here to reveal the wedding date'"></canvas>
+
+        <!-- Hint shown until scratching begins -->
+        <div class="scratch-hint" *ngIf="!scratchStarted && !scratchRevealed">
+          <div class="scratch-finger-wrap" aria-hidden="true">
+            <svg class="scratch-finger-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="2.5" r="1.2" fill="currentColor" opacity="0.8"/>
+              <path d="M7.5 4l-1-1M12.5 4l1-1M10 0.5v1.2" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+              <path d="M10 5.2v6.8l-2.2-1.5a1.5 1.5 0 0 0-2.1 2.2l4.6 5.2a4 4 0 0 0 3 1.6h3.2a3.4 3.4 0 0 0 3.4-3.4v-4.6a1.7 1.7 0 0 0-1.7-1.7H17v-1a1.7 1.7 0 0 0-1.7-1.7H14v-1.6a1.7 1.7 0 0 0-1.7-1.7h-.6a1.7 1.7 0 0 0-1.7 1.7z" fill="rgba(60,38,4,0.18)"/>
+            </svg>
+          </div>
+          <span>{{ ml ? 'ഇവിടെ സ്ക്രാച്ച് ചെയ്യുക' : 'Scratch here' }}</span>
+        </div>
+      </div>
+
+      <p class="scratch-sub" [class.revealed]="scratchRevealed">
+        {{ scratchRevealed ? (ml ? '✦ നിങ്ങൾ ക്ഷണിക്കപ്പെട്ടിരിക്കുന്നു! ഇൻഷാ അള്ളാഹ് ✦' : '✦ You\'re Invited! Insha Allah ✦') : (ml ? 'പ്രത്യേക സന്തോഷം കാണാൻ സ്ക്രാച്ച് ചെയ്യുക ✦' : 'Reveal a special surprise ✦') }}
+      </p>
+
+      <button *ngIf="!scratchRevealed" type="button" class="tap-reveal-btn" (click)="revealScratch()">
+        <span>✦ {{ ml ? 'നേരിട്ട് കാണുക' : 'Tap to Reveal' }} ✦</span>
+      </button>
+
+      <!-- Event info cards (Screenshots 2 & 3) -->
+      <div class="event-cards">
+        <div class="event-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <circle cx="12" cy="15" r="1.2" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <div class="card-label">{{ ml ? 'നിക്കാഹ് ദിനം' : 'Nikah Day' }}</div>
+          <div class="card-value">{{ ml ? 'ബുധനാഴ്ച' : 'Wednesday' }}<br>2 December 2026</div>
+          <div class="card-sub">Insha Allah</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="card-label">{{ ml ? 'സമയം' : 'Time' }}</div>
+          <div class="card-value card-times-dual">
+            <span>{{ ml ? 'നിക്കാഹ്' : 'Nikah' }}: {{ wedding.event.nikahTime }}</span>
+            <span>{{ ml ? 'സ്വീകരണം' : 'Reception' }}: {{ wedding.event.receptionTime }}</span>
+          </div>
+          <div class="card-sub">{{ ml ? 'മുതൽ' : 'Onwards' }}</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3c-2 2-3 4-3 6h6c0-2-1-4-3-6z" fill="currentColor" fill-opacity="0.2"></path>
+              <path d="M4 11h16v10H4z"></path>
+              <path d="M12 15c-1.5 0-2.5 1-2.5 2.5V21h5v-3.5c0-1.5-1-2.5-2.5-2.5z" fill="currentColor" fill-opacity="0.3"></path>
+              <path d="M7 11V7l1-1"></path>
+              <path d="M17 11V7l-1-1"></path>
+              <path d="M12 2v1"></path>
+            </svg>
+          </div>
+          <div class="card-label">{{ ml ? 'വേദി' : 'Venue' }}</div>
+          <div class="card-value">{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}</div>
+          <div class="card-sub">{{ ml && wedding.event.areaMalayalam ? wedding.event.areaMalayalam : wedding.event.area }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="invitation section" id="invitation">
+    <div class="section-inner narrow">
+      <p class="arabic bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <p class="eyebrow">{{ ml ? 'സർവ്വശക്തനായ അള്ളാഹുവിന്റെ അനുഗ്രഹത്തോടെ' : 'With the blessings of Almighty Allah' }}</p>
+      <h1>{{ ml ? 'താങ്കളെ സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു' : 'We cordially invite you' }}</h1>
+      <p class="script-label">{{ ml ? 'വിവാഹ സ്വീകരണം' : 'The Wedding Reception of' }}</p>
+      <div class="couple-names">
+        <h2>{{ wedding.couple.groom }}</h2>
+        <span class="ampersand">&</span>
+        <h2>{{ wedding.couple.bride }}</h2>
+      </div>
+      <div class="family-pair">
+        <div><small>{{ ml ? 'മകൻ' : 'Son of' }}</small><p>{{ wedding.families.groomFather }} & {{ wedding.families.groomMother }}</p><small>{{ wedding.families.groomHouse }}</small></div>
+        <div><small>{{ ml ? 'മകൾ' : 'Daughter of' }}</small><p>{{ wedding.families.brideFather }} & {{ wedding.families.brideMother }}</p><small>{{ wedding.families.brideHouse }}</small></div>
+      </div>
+      <div class="date-ribbon">
+        <span>✦</span><strong>{{ wedding.event.dateLabel }}</strong><span>✦</span>
+      </div>
+      <div class="event-times">
+        <div><strong>{{ wedding.event.receptionTime }}</strong><small>{{ ml ? 'വിവാഹ സ്വീകരണം' : 'Wedding Reception' }}</small></div>
+      </div>
+      <div class="venue-block">
+        <p class="eyebrow">{{ ml ? 'വേദി' : 'Venue' }}</p>
+        <h3>{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}</h3>
+        <p>{{ ml && wedding.event.areaMalayalam ? wedding.event.areaMalayalam : wedding.event.area }}</p>
+      </div>
+      <p class="closing-copy">{{ ml ? 'ഈ സന്തോഷ മുഹൂർത്തത്തിൽ താങ്കളുടെ സാന്നിധ്യവും പ്രാർത്ഥനയും ഞങ്ങൾ ആഗ്രഹിക്കുന്നു.' : wedding.copy.closing }}</p>
+    </div>
+  </section> -->
+
+  <section class="letter-section section">
+    <div class="section-inner narrow">
+      <p class="eyebrow">{{ ml ? 'താങ്കൾക്കൊരു കത്ത്' : 'A Letter To You' }}</p>
+      <h2 class="section-title">{{ ml ? 'സ്നേഹത്തോടെ തുറക്കുക' : 'Open with care' }}</h2>
+      <button class="letter-card" (click)="letterOpened = !letterOpened" [attr.aria-expanded]="letterOpened">
+        <span class="letter-icon">✉</span>
+        <strong>{{ letterOpened ? (ml ? 'കത്ത് അടയ്ക്കുക' : 'Close letter') : (ml ? 'സ്വാഗത കത്ത് തുറക്കാൻ ടാപ്പ് ചെയ്യുക' : 'Tap to open our welcome letter') }}</strong>
+        <span class="letter-hint">✦</span>
+      </button>
+      <div class="letter-content" [class.show]="letterOpened">
+        <p>{{ ml ? 'പ്രിയപ്പെട്ട കുടുംബാംഗങ്ങളും സുഹൃത്തുക്കളും,' : 'Dear Family & Friends,' }}</p>
+        <p>{{ wedding.copy.welcomeLetter }}</p>
+        <p class="signature">{{ ml ? 'സ്നേഹത്തോടെ, കുടുംബങ്ങൾ' : 'With love and gratitude, The Families' }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="families section">
+    <div class="section-inner">
+      <p class="eyebrow">{{ ml ? 'അനുഗ്രഹത്തിൽ ഒന്നിക്കുന്നു' : 'United in Blessing' }}</p>
+      <h2 class="section-title">{{ ml ? 'കുടുംബങ്ങൾ' : 'The Families' }}</h2>
+      <div class="family-cards">
+        <article class="family-card">
+          <div class="profile-placeholder">♔</div>
+          <p class="eyebrow">{{ ml ? 'വരൻ' : 'The Groom' }}</p>
+          <h3>{{ wedding.couple.groom }}</h3>
+          <p>{{ ml ? 'പ്രിയ പുത്രൻ' : 'Beloved son of' }}</p>
+          <strong>{{ wedding.families.groomFather }} & {{ wedding.families.groomMother }}</strong>
+          <small>{{ wedding.families.groomHouse }}</small>
+        </article>
+        <article class="family-card">
+          <div class="profile-placeholder">♕</div>
+          <p class="eyebrow">{{ ml ? 'വധു' : 'The Bride' }}</p>
+          <h3>{{ wedding.couple.bride }}</h3>
+          <p>{{ ml ? 'പ്രിയ പുത്രി' : 'Beloved daughter of' }}</p>
+          <strong>{{ wedding.families.brideFather }} & {{ wedding.families.brideMother }}</strong>
+          <small>{{ wedding.families.brideHouse }}</small>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="countdown-section section">
+    <div class="section-inner">
+      <p class="eyebrow">{{ ml ? 'ദിവസം കുറിച്ചു വെക്കൂ' : 'Save the Date' }}</p>
+      <h2 class="section-title">{{ ml ? 'പുണ്യ ദിനം' : 'The Blessed Day' }}</h2>
+      <p class="date-line">✦ {{ wedding.event.dateLabel }} ✦</p>
+      <p class="countdown-caption">{{ ml ? 'ദിവസങ്ങൾ എണ്ണുന്നു' : 'Counting down to the big day' }}</p>
+      <div class="countdown">
+        <div><strong>{{ countdown.days }}</strong><span>{{ ml ? 'ദിവസം' : 'Days' }}</span></div>
+        <div><strong>{{ countdown.hours }}</strong><span>{{ ml ? 'മണിക്കൂർ' : 'Hours' }}</span></div>
+        <div><strong>{{ countdown.minutes }}</strong><span>{{ ml ? 'മിനിറ്റ്' : 'Minutes' }}</span></div>
+        <div><strong>{{ countdown.seconds }}</strong><span>{{ ml ? 'സെക്കൻഡ്' : 'Seconds' }}</span></div>
+      </div>
+      <p class="event-summary">{{ ml ? 'നിക്കാഹ് & സ്വീകരണം' : 'Nikah & Reception' }} &bull; {{ wedding.event.nikahTime }} | {{ wedding.event.receptionTime }} {{ ml ? 'മുതൽ' : 'Onwards' }}</p>
+      <p class="event-summary">{{ ml && wedding.event.venueMalayalam ? wedding.event.venueMalayalam : wedding.event.venue }}, {{ ml && wedding.event.areaMalayalam ? wedding.event.areaMalayalam : wedding.event.area }}</p>
+      <div class="action-row">
+        <button class="outline-button" (click)="addToCalendar()">▦ {{ ml ? 'കലണ്ടറിൽ ചേർക്കുക' : 'Add to Calendar' }}</button>
+        <a class="outline-button" [href]="wedding.event.mapUrl" target="_blank" rel="noopener">⌖ {{ ml ? 'വഴി കാണിക്കുക' : 'Get Directions' }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="schedule-section section">
+    <div class="section-inner narrow">
+      <p class="eyebrow">{{ ml ? 'പരിപാടി ക്രമം' : 'Event Schedule' }}</p>
+      <h2 class="section-title">{{ ml ? 'ആഘോഷത്തിന്റെ നിമിഷങ്ങൾ' : 'A Day To Remember' }}</h2>
+      <p class="date-line">{{ wedding.event.dateLabel }}</p>
+      <div class="timeline">
+        <article class="timeline-item" *ngFor="let item of wedding.schedule">
+          <div class="timeline-time">{{ item.time }}</div>
+          <div class="timeline-dot"></div>
+          <div><h3>{{ ml ? item.titleMl : item.title }}</h3><p>{{ ml ? item.descriptionMl : item.description }}</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section section">
+    <div class="section-inner narrow">
+      <div class="arabic">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+      <p class="eyebrow">{{ ml ? 'സന്തോഷം പങ്കിടൂ' : 'Share the Joy' }}</p>
+      <h2 class="section-title">{{ ml ? 'മറ്റുള്ളവരെയും ക്ഷണിക്കൂ' : 'Invite others to celebrate with us' }}</h2>
+      <button class="whatsapp-button" (click)="shareWhatsApp()">◉ {{ ml ? 'വാട്സ്ആപ്പിൽ പങ്കിടുക' : 'Share via WhatsApp' }}</button>
+      <p class="footer-couple">{{ wedding.couple.groom }} & {{ wedding.couple.bride }}</p>
+      <p class="footer-date">{{ wedding.event.dateLabel }} · {{ wedding.event.venue }}</p>
+      <p class="footer-thanks">Jazakallah Khair</p>
+    </div>
+  </section>
+</main>
+
+<footer>Made with love & duas · {{ wedding.couple.groom }} & {{ wedding.couple.bride }}</footer>
