@@ -13,6 +13,10 @@
     </p>
 
     <!-- Couple Names on the Gate in the requested elegant cursive script -->
+    <div class="gate-host-badge">
+      <span>{{ ml ? '✦ വരന്റെ കുടുംബത്തിന്റെ ക്ഷണം ✦' : '✦ GROOM’S SIDE INVITATION ✦' }}</span>
+    </div>
+
     <div class="gate-couple-names">
       <span class="gate-name">{{ wedding.couple.groom }}</span>
       <span class="gate-amp">&</span>
@@ -67,6 +71,14 @@
       <div class="arch-frame">
         <p class="arch-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
         
+        <!-- Royal Crest Monogram & Groom Side Host Header -->
+        <div class="royal-crest" aria-hidden="true">
+          <!-- <div class="crest-frame">
+            <span class="crest-monogram">M &amp; A</span>
+          </div> -->
+          <span class="crest-tag">{{ ml ? 'വരന്റെ കുടുംബത്തിന്റെ സ്നേഹപൂർവ്വമായ ക്ഷണം' : 'INVITATION FROM GROOM’S FAMILY' }}</span>
+        </div>
+
         <p class="arch-eyebrow">
           <span *ngIf="!ml">WITH THE BLESSING OF ALMIGHTY ALLAH,<br>WE CORDIALLY INVITE YOU THE</span>
           <span *ngIf="ml">സർവ്വശക്തനായ അള്ളാഹുവിന്റെ അനുഗ്രഹത്തോടെ,<br>ഞങ്ങൾ താങ്കളെ സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു</span>
@@ -290,8 +302,8 @@
       </button>
       <div class="letter-content" [class.show]="letterOpened">
         <p>{{ ml ? 'പ്രിയപ്പെട്ട കുടുംബാംഗങ്ങളും സുഹൃത്തുക്കളും,' : 'Dear Family & Friends,' }}</p>
-        <p>{{ wedding.copy.welcomeLetter }}</p>
-        <p class="signature">{{ ml ? 'സ്നേഹത്തോടെ, കുടുംബങ്ങൾ' : 'With love and gratitude, The Families' }}</p>
+        <p>{{ ml ? (wedding.copy.welcomeLetterMalayalam || wedding.copy.welcomeLetter) : wedding.copy.welcomeLetter }}</p>
+        <p class="signature">{{ ml ? 'സ്നേഹത്തോടെ, സിദ്ദീഖ് & സക്കീന (മഞ്ചേരിത്തോടി കുടുംബം)' : 'With love & duas, Sidheeq & Sakeena (Mancherithodi Family)' }}</p>
       </div>
     </div>
   </section>
@@ -301,7 +313,10 @@
       <p class="eyebrow">{{ ml ? 'അനുഗ്രഹത്തിൽ ഒന്നിക്കുന്നു' : 'United in Blessing' }}</p>
       <h2 class="section-title">{{ ml ? 'കുടുംബങ്ങൾ' : 'The Families' }}</h2>
       <div class="family-cards">
-        <article class="family-card">
+        <article class="family-card host-family-card">
+          <div class="host-family-badge">
+            <span>{{ ml ? '✦ ആതിഥേയ കുടുംബം ✦' : '✦ HOST FAMILY ✦' }}</span>
+          </div>
           <div class="profile-placeholder">♔</div>
           <p class="eyebrow">{{ ml ? 'വരൻ' : 'The Groom' }}</p>
           <h3>{{ wedding.couple.groom }}</h3>
@@ -364,6 +379,7 @@
       <h2 class="section-title">{{ ml ? 'മറ്റുള്ളവരെയും ക്ഷണിക്കൂ' : 'Invite others to celebrate with us' }}</h2>
       <button class="whatsapp-button" (click)="shareWhatsApp()">◉ {{ ml ? 'വാട്സ്ആപ്പിൽ പങ്കിടുക' : 'Share via WhatsApp' }}</button>
       <p class="footer-couple">{{ wedding.couple.groom }} & {{ wedding.couple.bride }}</p>
+      <p class="footer-host">{{ ml ? 'സിദ്ദീഖ് & സക്കീന · മഞ്ചേരിത്തോടി കുടുംബം' : 'Sidheeq & Sakeena · Mancherithodi Family' }}</p>
       <p class="footer-date">{{ wedding.event.dateLabel }} · {{ wedding.event.venue }}</p>
       <p class="footer-thanks">Jazakallah Khair</p>
     </div>

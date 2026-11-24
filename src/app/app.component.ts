@@ -205,21 +205,21 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }, 200);
     }
 
-    // Launch celebratory confetti in royal purple & gold
+    // Launch celebratory confetti in royal sapphire & gold
     try {
       const launchConfetti = (window as unknown as { confetti?: typeof confetti }).confetti || confetti;
       launchConfetti({
         particleCount: 130,
         spread: 90,
         origin: { y: 0.6 },
-        colors: ['#3c1b5a', '#582a82', '#c59b48', '#e5cb8e', '#ffffff']
+        colors: ['#0f2744', '#1b3d68', '#c59b48', '#e5cb8e', '#ffffff']
       });
       setTimeout(() => {
         launchConfetti({
           particleCount: 80,
           spread: 120,
           origin: { y: 0.55 },
-          colors: ['#c59b48', '#e5cb8e', '#3c1b5a', '#f5ecfc']
+          colors: ['#c59b48', '#e5cb8e', '#0f2744', '#f0f5fc']
         });
       }, 300);
     } catch (e) {
@@ -370,14 +370,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.isOpening = true;
 
-    // Trigger celebratory confetti animation in royal purple & gold
+    // Trigger celebratory confetti animation in royal sapphire & gold
     try {
       const launchConfetti = (window as unknown as { confetti?: typeof confetti }).confetti || confetti;
       launchConfetti({
         particleCount: 140,
         spread: 90,
         origin: { y: 0.4 },
-        colors: ['#3c1b5a', '#582a82', '#c59b48', '#e5cb8e', '#ffffff']
+        colors: ['#0f2744', '#1b3d68', '#c59b48', '#e5cb8e', '#ffffff']
       });
 
       setTimeout(() => {
@@ -385,7 +385,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           particleCount: 80,
           spread: 120,
           origin: { y: 0.32 },
-          colors: ['#c59b48', '#e5cb8e', '#3c1b5a', '#f5ecfc']
+          colors: ['#c59b48', '#e5cb8e', '#0f2744', '#f0f5fc']
         });
       }, 350);
     } catch (e) {
